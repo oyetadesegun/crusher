@@ -36,9 +36,9 @@ const stats = [
 ];
 
 const testimonials = [
-  { name: "Sarah M.", role: "Homeowner", text: "GuardPestPro eliminated our termite problem completely. Their team was professional and thorough.", rating: 5 },
+  { name: "Sarah M.", role: "Homeowner", text: "TobiCrusher eliminated our termite problem completely. Their team was professional and thorough.", rating: 5 },
   { name: "James K.", role: "Restaurant Owner", text: "We rely on them for monthly pest control. Zero issues since we started. Highly recommended!", rating: 5 },
-  { name: "Linda R.", role: "Property Manager", text: "Managing 50+ units, I trust only GuardPestPro. Fast, effective, and fairly priced.", rating: 5 },
+  { name: "Linda R.", role: "Property Manager", text: "Managing 50+ units, I trust only TobiCrusher. Fast, effective, and fairly priced.", rating: 5 },
 ];
 
 const Index = () => {
@@ -48,11 +48,11 @@ const Index = () => {
 
       {/* Hero */}
       <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image src={heroImage} alt="Professional fumigation service" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 z-0">
+          <Image src={heroImage} alt="Professional fumigation service" className="w-full h-full object-cover" priority />
           <div className="absolute inset-0 bg-gradient-to-r from-secondary/95 via-secondary/80 to-secondary/40" />
         </div>
-        <div className="relative container-narrow px-4 md:px-8 pt-16">
+        <div className="relative z-10 container-narrow px-4 md:px-8 pt-16">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -168,9 +168,13 @@ const Index = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="flex justify-center"
+              className="flex justify-center w-full"
             >
-              <Image src={productImage} alt="GuardPestPro insecticide product" className="w-full md:max-w-sm drop-shadow-2xl" />
+              <Image 
+                src={productImage} 
+                alt="TobiCrusher insecticide product" 
+                className="w-full max-w-[280px] md:max-w-sm drop-shadow-2xl h-auto" 
+              />
             </motion.div>
           </div>
         </div>
@@ -180,7 +184,7 @@ const Index = () => {
       <section className="section-padding bg-background">
         <div className="container-narrow">
           <div className="text-center mb-14">
-            <span className="text-primary font-medium text-sm uppercase tracking-wider">Why GuardPestPro</span>
+            <span className="text-primary font-medium text-sm uppercase tracking-wider">Why TobiCrusher</span>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mt-2">
               Why Clients Trust Us
             </h2>

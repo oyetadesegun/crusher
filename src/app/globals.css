@@ -62,13 +62,14 @@
 @layer base {
   html,
   body {
-    max-width: 1280px;
-    margin: 0 auto;
-    text-align: center;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
   }
 
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
 
   body {

@@ -20,15 +20,11 @@ const Navbar = () => {
   const location = usePathname();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-secondary/95 backdrop-blur-md border-b border-border">
-      <div className="container-narrow flex items-center justify-between h-16 px-4 md:px-8">
-        <Link href="/" className="flex items-center gap-2">
-          {/* <Bug className="h-7 w-7 text-primary" /> */}
-          <Image src={logo} alt="Logo" className="h-10 w-10" />
-          <Image src={logo2} alt="Logo" className="h-10 w-40 invert brightness-0" />
-          {/* <span className="font-display text-xl font-bold text-secondary-foreground">
-            GuardPest<span className="text-primary">Pro</span>
-          </span> */}
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-secondary/95 backdrop-blur-md border-b border-border w-full">
+      <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-4 md:px-8">
+        <Link href="/" className="flex items-center gap-2 flex-shrink-0">
+          <Image src={logo} alt="Logo" className="h-8 w-8 md:h-10 md:w-10" />
+          <Image src={logo2} alt="Logo" className="h-8 w-32 md:h-10 md:w-40 invert brightness-0" />
         </Link>
 
         {/* Desktop nav */}

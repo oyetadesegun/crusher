@@ -7,8 +7,8 @@ const Footer = () => {
   return (
     <footer className="bg-secondary text-secondary-foreground">
       <div className="container-narrow section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          <div className="md:col-span-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+          <div className="md:col-span-1 text-center md:text-left flex flex-col items-center md:items-start">
             <Link href="/" className="flex items-center gap-2 mb-4">
               {/* <Bug className="h-7 w-7 text-primary" /> */}
               <Image src={logo} alt="Logo" className="h-10 w-10" />
@@ -21,8 +21,8 @@ const Footer = () => {
             </p>
           </div>
 
-          <div>
-            <h4 className="font-display font-semibold mb-4 text-primary">Quick Links</h4>
+          <div className="text-center md:text-left">
+            <h4 className="font-display font-semibold mb-4 text-primary uppercase tracking-wider text-xs">Quick Links</h4>
             <ul className="space-y-2 text-sm text-secondary-foreground/70">
               <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
               <li><Link href="/services" className="hover:text-primary transition-colors">Services</Link></li>
@@ -31,8 +31,8 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-display font-semibold mb-4 text-primary">Services</h4>
+          <div className="text-center md:text-left">
+            <h4 className="font-display font-semibold mb-4 text-primary uppercase tracking-wider text-xs">Services</h4>
             <ul className="space-y-2 text-sm text-secondary-foreground/70">
               <li>Residential Fumigation</li>
               <li>Commercial Pest Control</li>
@@ -41,16 +41,16 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-display font-semibold mb-4 text-primary">Contact</h4>
-            <ul className="space-y-3 text-sm text-secondary-foreground/70">
+          <div className="text-center md:text-left">
+            <h4 className="font-display font-semibold mb-4 text-primary uppercase tracking-wider text-xs">Contact</h4>
+            <ul className="space-y-3 text-sm text-secondary-foreground/70 flex flex-col items-center md:items-start">
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-primary" />
                 (123) 456-7890
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-primary" />
-                info@guardpestpro.com
+                info@tobicrusher.com
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 text-primary mt-0.5" />
@@ -61,7 +61,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-border mt-12 pt-8 text-center text-sm text-secondary-foreground/50">
-          © {new Date().getFullYear()} GuardPestPro. All rights reserved.
+          © {new Date().getFullYear()} TobiCrusher. All rights reserved.
         </div>
       </div>
     </footer>
