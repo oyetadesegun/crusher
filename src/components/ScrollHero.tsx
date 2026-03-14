@@ -50,37 +50,76 @@ const ScrollHero = () => {
     setImages(loadedImages);
   }, []);
 
-  // Update canvas frame based on scroll
+  // Update canvas frame based on scroll with High-DPI support
   useEffect(() => {
-    const unsubscribe = frameIndex.on("change", (latest) => {
-      const index = Math.min(Math.floor(latest), FRAME_COUNT - 1);
+    let animationFrameId: number;
+
+    const render = () => {
+      const index = Math.min(Math.floor(frameIndex.get()), FRAME_COUNT - 1);
       const canvas = canvasRef.current;
       const ctx = canvas?.getContext("2d");
       
       if (images.length > 0 && canvas && ctx) {
         const img = images[index];
-        if (img?.complete) {
-          // Maintain canvas dimensions to match image
-          if (canvas.width !== img.width) canvas.width = img.width;
-          if (canvas.height !== img.height) canvas.height = img.height;
-          ctx.drawImage(img, 0, 0);
+        if (img?.complete && img.naturalWidth > 0) {
+          
+          // 1. Get exact display size scaled by device pixel ratio
+          const rect = canvas.getBoundingClientRect();
+          const dpr = window.devicePixelRatio || 1;
+          const displayWidth = Math.round(rect.width * dpr);
+          const displayHeight = Math.round(rect.height * dpr);
+
+          // 2. Resize canvas strictly to physical pixels to avoid CSS scaling blur
+          if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
+            canvas.width = displayWidth;
+            canvas.height = displayHeight;
+          }
+
+          // 3. Clear canvas
+          ctx.clearRect(0, 0, displayWidth, displayHeight);
+
+          // 4. Calculate object-cover dimensions to draw the image crisp
+          const imgRatio = img.naturalWidth / img.naturalHeight;
+          const canvasRatio = displayWidth / displayHeight;
+
+          let drawWidth = displayWidth;
+          let drawHeight = displayHeight;
+          let offsetX = 0;
+          let offsetY = 0;
+
+          if (imgRatio > canvasRatio) {
+            // Image is wider than canvas
+            drawWidth = displayHeight * imgRatio;
+            offsetX = (displayWidth - drawWidth) / 2;
+          } else {
+            // Image is taller than canvas
+            drawHeight = displayWidth / imgRatio;
+            offsetY = (displayHeight - drawHeight) / 2;
+          }
+
+          // Use highest quality smoothing
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = "high";
+          ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
         }
       }
+    };
+
+    const unsubscribe = frameIndex.on("change", () => {
+      // Use requestAnimationFrame for smoother rendering
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(render);
     });
 
-    // Initial render
-    if (images.length > 0 && images[0]?.complete && canvasRef.current) {
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext("2d");
-      const img = images[0];
-      if (ctx && img) {
-        if (canvas.width !== img.width) canvas.width = img.width;
-        if (canvas.height !== img.height) canvas.height = img.height;
-        ctx.drawImage(img, 0, 0);
-      }
-    }
+    // Initial render and setup resize listener
+    render();
+    window.addEventListener("resize", render);
     
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      window.removeEventListener("resize", render);
+    };
   }, [images, frameIndex]);
 
   return (
@@ -125,7 +164,7 @@ const ScrollHero = () => {
               >
                 <div className="flex items-center gap-2 text-white/60 text-sm">
                   <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                  <span>196 frame sequence</span>
+                  {/* <span>196 frame sequence</span> */}
                 </div>
               </motion.div>
             </motion.div>

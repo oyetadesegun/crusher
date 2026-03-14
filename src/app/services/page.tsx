@@ -106,7 +106,7 @@ export default function ServicesPage() {
                     {service.title}
                   </h2>
                   
-                  <p className="text-white/60 text-lg leading-relaxed font-light mb-8 flex-grow">
+                  <p className="text-white/60 text-lg leading-relaxed font-light mb-8 grow">
                     {service.desc}
                   </p>
 

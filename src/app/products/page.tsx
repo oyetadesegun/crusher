@@ -158,8 +158,7 @@ export default function ProductsPage() {
                   </div>
                 </div>
 
-                {/* Content Area */}
-                <div className="p-6 flex flex-col flex-grow">
+                <div className="p-6 flex flex-col grow">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="font-display text-xl font-bold text-white group-hover:text-primary transition-colors">{product.name}</h3>
                     <span className="font-mono font-bold text-lg text-white">{product.price}</span>
@@ -174,7 +173,7 @@ export default function ProductsPage() {
                     <span className="text-xs text-white/40">({product.reviews})</span>
                   </div>
 
-                  <p className="text-white/60 text-sm font-light leading-relaxed mb-6 flex-grow">
+                  <p className="text-white/60 text-sm font-light leading-relaxed mb-6 grow">
                     {product.description}
                   </p>
 
