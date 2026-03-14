@@ -64,7 +64,7 @@
   body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    overflow-x: clip; /* clip allows sticky elements to work unlike hidden */
   }
 
   * {
@@ -244,4 +244,31 @@
 
 .read-the-docs {
   color: #888;
+}
+/* Add to your global.css or tailwind.css */
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-slow-reverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-spin-slow-reverse {
+  animation: spin-slow-reverse 20s linear infinite;
 }
